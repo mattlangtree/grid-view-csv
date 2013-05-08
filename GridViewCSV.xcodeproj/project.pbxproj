@@ -19,6 +19,7 @@
 		C9CCF74C173A6E1D00B6C740 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9CCF74B173A6E1D00B6C740 /* ViewController.m */; };
 		C9CCF74F173A6E1D00B6C740 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9CCF74D173A6E1D00B6C740 /* ViewController_iPhone.xib */; };
 		C9CCF752173A6E1D00B6C740 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9CCF750173A6E1D00B6C740 /* ViewController_iPad.xib */; };
+		C9CCF759173A740800B6C740 /* events.json in Resources */ = {isa = PBXBuildFile; fileRef = C9CCF758173A740800B6C740 /* events.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		C9CCF74B173A6E1D00B6C740 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		C9CCF74E173A6E1D00B6C740 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
 		C9CCF751173A6E1D00B6C740 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
+		C9CCF758173A740800B6C740 /* events.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = events.json; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 		C9CCF738173A6E1C00B6C740 /* GridViewCSV */ = {
 			isa = PBXGroup;
 			children = (
+				C9CCF758173A740800B6C740 /* events.json */,
 				C9CCF741173A6E1C00B6C740 /* AppDelegate.h */,
 				C9CCF742173A6E1C00B6C740 /* AppDelegate.m */,
 				C9CCF74A173A6E1D00B6C740 /* ViewController.h */,
@@ -167,6 +170,7 @@
 				C9CCF749173A6E1D00B6C740 /* Default-568h@2x.png in Resources */,
 				C9CCF74F173A6E1D00B6C740 /* ViewController_iPhone.xib in Resources */,
 				C9CCF752173A6E1D00B6C740 /* ViewController_iPad.xib in Resources */,
+				C9CCF759173A740800B6C740 /* events.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
