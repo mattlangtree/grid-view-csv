@@ -7,16 +7,16 @@
 //
 
 #import "ViewController.h"
-
-float leftPadding = 4.f;
-float rightPadding = 4.f;
-
-static UIColor *rowOddColour;
+#import "TableLayout.h"
+#import "TableCell.h"
 
 @interface ViewController ()
 {
     NSArray *itemsArray;
+    BOOL    _alertVisible;
 }
+
+@property (nonatomic, strong) UICollectionView *collectionView;
 
 @end
 
@@ -26,9 +26,7 @@ static UIColor *rowOddColour;
 {
     self = [super init];
     if (self) {
-        if (!rowOddColour) {
-            rowOddColour = [UIColor colorWithRed:0.1 green:0.1 blue:0.9 alpha:1];
-        }
+
     }
     return self;
 }
@@ -36,101 +34,52 @@ static UIColor *rowOddColour;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
     
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-    dispatch_async(queue, ^{
+    // Initialize collection view and layout object
+    TableLayout *layout = [[TableLayout alloc] init];
+    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height) collectionViewLayout:layout];
+    _collectionView.dataSource = self;
+    _collectionView.delegate = self;
+    _collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.view addSubview:_collectionView];
+    [self.collectionView registerClass:[TableCell class] forCellWithReuseIdentifier:[TableCell reuseIdentifier]];
         
-        NSString *jsonFilePath = [[NSBundle mainBundle] pathForResource:@"events" ofType:@"json"];
-        NSString *jsonString = [NSString stringWithContentsOfFile:jsonFilePath encoding:NSUTF8StringEncoding error:NULL];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
+    
+    [self updateData];
+    
+}
 
-        NSError *e = nil;
-        NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options: NSJSONReadingMutableContainers error: &e];
-        
-        if (!jsonArray) {
-            NSLog(@"Error parsing JSON: %@", e);
-        } else {
-            for(NSDictionary *item in jsonArray) {
-                NSLog(@"Item: %@", item);
-            }
-        }
-        
-        NSLog(@"jsonArray: %@",jsonArray);
-        itemsArray = jsonArray;
-        dispatch_async(dispatch_get_main_queue(), ^{
-
-            CGSize contentSize = [self contentSize];
-            _gridView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, contentSize.width, contentSize.height)];
-            [_gridView setBackgroundColor:[UIColor whiteColor]];
-            [_scrollView addSubview:_gridView];
-            [self reloadData];
-            [_scrollView setNeedsDisplay];
+- (void)updateData
+{
+    
+    if (!itemsArray) {
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+        dispatch_async(queue, ^{
             
+            NSString *jsonFilePath = [[NSBundle mainBundle] pathForResource:@"events" ofType:@"json"];
+            NSString *jsonString = [NSString stringWithContentsOfFile:jsonFilePath encoding:NSUTF8StringEncoding error:NULL];
+
+            NSError *e = nil;
+            NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options: NSJSONReadingMutableContainers error: &e];
+            
+            if (!jsonArray) {
+                NSLog(@"Error parsing JSON: %@", e);
+            } else {
+                for(NSDictionary *item in jsonArray) {
+                    NSLog(@"Item: %@", item);
+                }
+            }
+            
+            NSLog(@"jsonArray: %@",jsonArray);
+            itemsArray = jsonArray;
+            dispatch_async(dispatch_get_main_queue(), ^{
+
+                [_collectionView reloadData];
+                
+            });
         });
-    });
-    
-    [_scrollView setAlwaysBounceHorizontal:YES];
-    [_scrollView setAlwaysBounceVertical:YES];
-}
-
-- (CGSize)contentSize
-{
-    return CGSizeMake(([self columnsInTable] +1) * [self widthForColumn], ([self rowsInTable] + 1) * [self heightForRow]);
-}
-
-- (void)reloadData
-{
-    [_scrollView setContentSize:[self contentSize]];
-    
-    for (int r = 0; r < [self rowsInTable] + 1; r++) {
-        int rowindex = (r > 0) ? r - 1 : 0;
-        NSDictionary *dictionary = [itemsArray objectAtIndex:rowindex];
-        NSArray *dictionaryKeys = [dictionary allKeys];
-        for (int c=0; c < [self columnsInTable] + 1; c++) {
-            int columnindex = (c > 0) ? c - 1 : 0;
-            UILabel *textLabel = [[UILabel alloc] init];
-            [textLabel setFont:[UIFont systemFontOfSize:13.f]];
-            if (r == 0) {
-                [textLabel setText:[dictionaryKeys objectAtIndex:columnindex]];
-                [textLabel setFont:[UIFont boldSystemFontOfSize:13.f]];
-                [textLabel setBackgroundColor:[UIColor lightGrayColor]];
-                [textLabel setFrame:CGRectMake((c * [self widthForColumn]), r * [self heightForRow], [self widthForColumn], [self heightForRow])];
-            }
-            else if (c == 0) {
-                [textLabel setText:[NSString stringWithFormat:@"%d",r]];
-                [textLabel setFont:[UIFont boldSystemFontOfSize:13.f]];
-                [textLabel setBackgroundColor:[UIColor lightGrayColor]];
-                [textLabel setFrame:CGRectMake((c * [self widthForColumn]), r * [self heightForRow], [self widthForColumn], [self heightForRow])];
-            }
-            
-            else {
-                [textLabel setFrame:CGRectMake((c * [self widthForColumn])+leftPadding, r * [self heightForRow], [self widthForColumn] - leftPadding - rightPadding, [self heightForRow])];
-                id value = [dictionary objectForKey:[dictionaryKeys objectAtIndex:columnindex]];
-                if ([value isKindOfClass:[NSString class]]) {
-                    [textLabel setText:(NSString *)value];
-                }
-                else if ([value isKindOfClass:[NSNumber class]]) {
-                    [textLabel setText:[(NSNumber *) value stringValue]];
-                    [textLabel setTextAlignment:NSTextAlignmentRight];
-                }
-                else if ([value isKindOfClass:[NSNull class]]) {
-                    [textLabel setText:@"NULL"];
-                    [textLabel setTextColor:[UIColor lightGrayColor]];
-                }
-                else {
-                    [textLabel setText:@" "];
-                }
-                if (r % 2 == 0) {
-                    [textLabel setBackgroundColor:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1]];
-                }
-                else {
-                    [textLabel setBackgroundColor:[UIColor whiteColor]];
-                }
-            }
-            [_gridView addSubview:textLabel];
-        }
     }
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -139,31 +88,36 @@ static UIColor *rowOddColour;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillAppear:(BOOL)animated
+#pragma mark - UICollectionViewDataSource
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    [super viewWillAppear:animated];
+    return (itemsArray) ? itemsArray.count : 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return (itemsArray) ? [[itemsArray objectAtIndex:0] count] : 0;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    TableCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[TableCell reuseIdentifier] forIndexPath:indexPath];
+    cell.label.text = [NSString stringWithFormat:@"(%d,%d)", indexPath.item, indexPath.section];
+    cell.isOddLine = (indexPath.section %2) == 1;
     
-    [self reloadData];
+    NSDictionary *dictionary = [itemsArray objectAtIndex:indexPath.section];
+    NSArray *dictionaryKeys = [dictionary allKeys];
+    id value = [dictionary objectForKey:[dictionaryKeys objectAtIndex:indexPath.item]];
+    
+    [cell setValue:value];
+    
+    return cell;
 }
 
-- (int)columnsInTable
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 8;
-}
-
-- (int)rowsInTable
-{
-    return itemsArray.count;
-}
-
-- (float)widthForColumn
-{
-    return 160.f;
-}
-
-- (float)heightForRow
-{
-    return 30.f;
+    NSLog(@"cell selected: %d, %d",indexPath.section,indexPath.item);
 }
 
 @end

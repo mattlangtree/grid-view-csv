@@ -12,7 +12,6 @@
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
-			<string>IBUIScrollView</string>
 			<string>IBUIView</string>
 		</array>
 		<array key="IBDocument.PluginDependencies">
@@ -34,19 +33,7 @@
 			<object class="IBUIView" id="774585933">
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
-				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUIScrollView" id="849429916">
-						<reference key="NSNextResponder" ref="774585933"/>
-						<int key="NSvFlags">274</int>
-						<string key="NSFrameSize">{320, 548}</string>
-						<reference key="NSSuperview" ref="774585933"/>
-						<reference key="NSWindow"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<bool key="IBUIMultipleTouchEnabled">YES</bool>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-					</object>
-				</array>
+				<array class="NSMutableArray" key="NSSubviews"/>
 				<string key="NSFrame">{{0, 20}, {320, 548}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
@@ -89,14 +76,6 @@
 					</object>
 					<int key="connectionID">7</int>
 				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">scrollView</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="849429916"/>
-					</object>
-					<int key="connectionID">13</int>
-				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -120,15 +99,8 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">6</int>
 						<reference key="object" ref="774585933"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="849429916"/>
-						</array>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="0"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">8</int>
-						<reference key="object" ref="849429916"/>
-						<reference key="parent" ref="774585933"/>
 					</object>
 				</array>
 			</object>
@@ -138,7 +110,6 @@
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>

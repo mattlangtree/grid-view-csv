@@ -10,8 +10,4 @@
 
 @interface ViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-
-@property (strong, nonatomic) UIView *gridView;
-
 @end

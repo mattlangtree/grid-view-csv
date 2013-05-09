@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C903B33A173B827E000BCD80 /* TableLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C903B339173B827E000BCD80 /* TableLayout.m */; };
+		C903B33D173BBC30000BCD80 /* TableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C903B33C173BBC30000BCD80 /* TableCell.m */; };
 		C9CCF733173A6E1C00B6C740 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9CCF732173A6E1C00B6C740 /* UIKit.framework */; };
 		C9CCF735173A6E1C00B6C740 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9CCF734173A6E1C00B6C740 /* Foundation.framework */; };
 		C9CCF737173A6E1C00B6C740 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9CCF736173A6E1C00B6C740 /* CoreGraphics.framework */; };
@@ -23,6 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C903B338173B827E000BCD80 /* TableLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableLayout.h; path = "Custom Views/TableLayout.h"; sourceTree = "<group>"; };
+		C903B339173B827E000BCD80 /* TableLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableLayout.m; path = "Custom Views/TableLayout.m"; sourceTree = "<group>"; };
+		C903B33B173BBC30000BCD80 /* TableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableCell.h; path = "Custom Views/TableCell.h"; sourceTree = "<group>"; };
+		C903B33C173BBC30000BCD80 /* TableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableCell.m; path = "Custom Views/TableCell.m"; sourceTree = "<group>"; };
 		C9CCF72F173A6E1C00B6C740 /* GridViewCSV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GridViewCSV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9CCF732173A6E1C00B6C740 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C9CCF734173A6E1C00B6C740 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -95,6 +101,10 @@
 				C9CCF74D173A6E1D00B6C740 /* ViewController_iPhone.xib */,
 				C9CCF750173A6E1D00B6C740 /* ViewController_iPad.xib */,
 				C9CCF739173A6E1C00B6C740 /* Supporting Files */,
+				C903B338173B827E000BCD80 /* TableLayout.h */,
+				C903B339173B827E000BCD80 /* TableLayout.m */,
+				C903B33B173BBC30000BCD80 /* TableCell.h */,
+				C903B33C173BBC30000BCD80 /* TableCell.m */,
 			);
 			path = GridViewCSV;
 			sourceTree = "<group>";
@@ -184,6 +194,8 @@
 				C9CCF73F173A6E1C00B6C740 /* main.m in Sources */,
 				C9CCF743173A6E1C00B6C740 /* AppDelegate.m in Sources */,
 				C9CCF74C173A6E1D00B6C740 /* ViewController.m in Sources */,
+				C903B33A173B827E000BCD80 /* TableLayout.m in Sources */,
+				C903B33D173BBC30000BCD80 /* TableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +328,7 @@
 				C9CCF757173A6E1D00B6C740 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
